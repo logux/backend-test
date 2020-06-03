@@ -19,6 +19,7 @@
   },
   "bin": "./bin.js",
   "dependencies": {
+    "@logux/core": "logux/core#next",
     "@logux/server": "logux/server#next",
     "chalk": "^4.0.0",
     "ora": "^4.0.4"

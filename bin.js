@@ -4,6 +4,7 @@ let { readFileSync } = require('fs')
 let { join } = require('path')
 let chalk = require('chalk')
 
+let tests = require('./tests')
 let run = require('./run')
 
 let pkgFile = readFileSync(join(__dirname, 'package.json'))
@@ -15,29 +16,45 @@ if (
   process.argv.includes('--help')
 ) {
   process.stdout.write(
-    pkg.description + '\nUsage: npx @logux/backend-test URL\n'
+    chalk.bold('Usage: ') +
+      'npx @logux/backend-test ' +
+      chalk.yellow('URL [TEST]') +
+      '\n'
   )
   process.exit(0)
+}
+
+if (process.argv[3] && !tests[process.argv[3]]) {
+  process.stderr.write(chalk.red('Unknown test ' + process.argv[3] + '\n'))
+  process.exit(1)
 }
 
 let version = pkg.version.split('.')[0]
 
 process.stdout.write(
-  'Protocol version: ' +
-    chalk.bold(version) +
+  chalk.bold('Protocol version: ') +
+    chalk.green(version) +
     '\n' +
-    'Secret:           ' +
-    chalk.bold('parole') +
+    chalk.bold('Secret:           ') +
+    chalk.green('parole') +
     '\n' +
-    'Logux server:     ' +
-    chalk.bold('http://localhost:31337/') +
+    chalk.bold('Logux server:     ') +
+    chalk.green('http://localhost:31337/') +
     '\n' +
-    'Back-end server:  ' +
-    chalk.bold(process.argv[2]) +
-    '\n\n'
+    chalk.bold('Back-end server:  ') +
+    chalk.green(process.argv[2]) +
+    '\n'
 )
 
-run(process.argv[2], 'parole').catch(e => {
-  process.stderr.write(chalk.red(e.stack))
+if (process.argv[3]) {
+  process.stdout.write(
+    chalk.bold('Test:             ') + chalk.green(process.argv[3]) + '\n'
+  )
+}
+
+process.stdout.write('\n')
+
+run('parole', process.argv[2], process.argv[3]).catch(e => {
+  process.stderr.write(chalk.red(e.stack) + '\n')
   process.exit(1)
 })
