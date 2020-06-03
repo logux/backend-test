@@ -21,6 +21,7 @@ if (
       chalk.yellow('URL [TEST]') +
       '\n'
   )
+  process.stdout.write('       npx @logux/backend-test local\n')
   process.exit(0)
 }
 
