@@ -8,7 +8,7 @@
     "test"
   ],
   "scripts": {
-    "test": "eslint . && yaspeller *.md"
+    "test": "eslint . && ./bin.js local && yaspeller *.md"
   },
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
@@ -60,7 +60,10 @@
     }
   },
   "eslintConfig": {
-    "extends": "@logux/eslint-config"
+    "extends": "@logux/eslint-config",
+    "rules": {
+      "security/detect-possible-timing-attacks": "off"
+    }
   },
   "yaspeller": {
     "lang": "en",
