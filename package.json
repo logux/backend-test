@@ -1,7 +1,7 @@
 {
   "name": "@logux/backend-test",
   "version": "0.0.0",
-  "description": "Test for Logux Back-end Protocol implementations",
+  "description": "Test Logux Back-end Protocol implementation",
   "keywords": [
     "logux",
     "server",
@@ -16,6 +16,10 @@
   "repository": "logux/backend-test",
   "engines": {
     "node": ">=10.0.0"
+  },
+  "bin": "./bin.js",
+  "dependencies": {
+    "chalk": "^4.0.0"
   },
   "devDependencies": {
     "@logux/eslint-config": "^39.0.3",

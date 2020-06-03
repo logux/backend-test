@@ -14,6 +14,6 @@ between client, server, and other clients.
 * **[Projects](https://logux.io/guide/architecture/parts/)**
   inside Logux ecosystem
 
-This repository contains test for [Logux Back-end Protocol] implementations.
+This repository contains test [Logux Back-end Protocol] implementation.
 
 [Logux Back-end Protocol]: https://logux.io/protocols/backend/spec/
