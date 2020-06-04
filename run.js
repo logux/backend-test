@@ -34,6 +34,16 @@ async function runTest (data) {
       )
       process.exit(1)
     } else {
+      process.stderr.write(
+        'Re-run test: ' +
+          chalk.yellow(
+            'npx @logux/backend-test ' +
+              data.backend +
+              ' ' +
+              chalk.bold(data.index)
+          ) +
+          '\n\n'
+      )
       throw e
     }
   }

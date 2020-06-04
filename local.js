@@ -14,8 +14,8 @@ module.exports = function (server) {
   let names = new Map()
 
   server.auth(({ userId, token, cookie, headers }) => {
-    if (headers.errorText) {
-      throw new Error(headers.errorText)
+    if (headers.error) {
+      throw new Error(headers.error)
     } else if (token === `${userId}:good`) {
       return true
     } else if (cookie.token === `${userId}:good`) {
@@ -27,8 +27,8 @@ module.exports = function (server) {
 
   server.channel('users/:id', {
     access (ctx) {
-      if (ctx.headers.errorText) {
-        throw new Error(ctx.headers.errorText)
+      if (ctx.headers.error) {
+        throw new Error(ctx.headers.error)
       } else {
         return ctx.params.id === ctx.userId
       }
@@ -45,8 +45,8 @@ module.exports = function (server) {
 
   server.type('users/name', {
     access (ctx, action) {
-      if (ctx.headers.errorText) {
-        throw new Error(ctx.headers.errorText)
+      if (ctx.headers.error) {
+        throw new Error(ctx.headers.error)
       } else {
         return action.payload.userId === ctx.userId
       }
