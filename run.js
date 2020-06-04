@@ -1,16 +1,41 @@
 let { TestServer } = require('@logux/server')
+let chalk = require('chalk')
 let ora = require('ora')
 
 let local = require('./local')
 let tests = require('./tests')
 
-async function runTest (index) {
-  let spinner = ora(tests[index].desc).start()
+async function runTest (data) {
+  let spinner = ora(tests[data.index].title).start()
   try {
-    await tests[index].fn()
+    await tests[data.index].test(data)
     spinner.succeed()
-  } catch {
+    for (let client of data.server.connected.values()) {
+      client.destroy()
+    }
+  } catch (e) {
     spinner.fail()
+    process.stderr.write('\n')
+    if (e.assert) {
+      let file = e.stack.split('\n')[1].match(/\((.*)\)$/)[1]
+      process.stderr.write(
+        '  ' +
+          chalk.bold.red(e.message) +
+          '\n\nTest:      ' +
+          chalk.yellow(file) +
+          '\nRe-run it: ' +
+          chalk.yellow(
+            'npx @logux/backend-test ' +
+              data.backend +
+              ' ' +
+              chalk.bold(data.index)
+          ) +
+          '\n'
+      )
+      process.exit(1)
+    } else {
+      throw e
+    }
   }
 }
 
@@ -34,10 +59,10 @@ module.exports = async function run (controlSecret, backend, only) {
   spinner.succeed()
 
   if (only) {
-    await runTest(only)
+    await runTest({ controlSecret, backend, server, index: only })
   } else {
     for (let i = 0; i < tests.length; i++) {
-      await runTest(i)
+      await runTest({ controlSecret, backend, server, index: i })
     }
   }
 
