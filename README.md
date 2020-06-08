@@ -1,4 +1,4 @@
-# Logux Server
+# Logux Back-end Test
 
 <img align="right" width="95" height="148" title="Logux logotype"
      src="https://logux.io/branding/logotype.svg">
