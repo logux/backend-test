@@ -21,15 +21,15 @@
   "dependencies": {
     "@logux/core": "logux/core#next",
     "@logux/server": "logux/server#next",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "ora": "^4.0.4"
   },
   "devDependencies": {
     "@logux/eslint-config": "^39.0.3",
     "@logux/sharec-config": "^0.7.3",
-    "eslint": "^7.0.0",
+    "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-jest": "^23.13.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-let": "^1.0.1",
@@ -39,7 +39,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-unicorn": "^20.0.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.4",
+    "lint-staged": "^10.2.9",
     "size-limit": "^4.5.0",
     "yaspeller": "^7.0.0"
   },
