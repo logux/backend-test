@@ -14,6 +14,7 @@ module.exports = function (server) {
   let names = new Map()
 
   server.options.subprotocol = '1.0.0'
+  server.options.supports = '^1.0.0'
 
   server.auth(({ userId, token, cookie, headers }) => {
     if (headers.error) {

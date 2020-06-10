@@ -1,11 +1,14 @@
 let { it, getTests, expectError, assert } = require('./util')
 
 it('Supports token authentication', async ({ server }) => {
-  await server.connect('10', { token: '10:good' })
+  await server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
 })
 
 it('Supports cookie authentication', async ({ server }) => {
-  await server.connect('10', { cookie: { token: '10:good' } })
+  await server.connect('10', {
+    cookie: { token: '10:good' },
+    subprotocol: '1.0.0'
+  })
 })
 
 it('Processes an error during the authentication', async ({ server }) => {
@@ -16,6 +19,7 @@ it('Processes an error during the authentication', async ({ server }) => {
   await expectError('Wrong credentials', () =>
     server.connect('10', {
       token: '10:good',
+      subprotocol: '1.0.0',
       headers: { error: 'Test error' }
     })
   )
@@ -27,18 +31,21 @@ it('Processes an error during the authentication', async ({ server }) => {
 
 it('Detects wrong token', async ({ server }) => {
   await expectError('Wrong credentials', () =>
-    server.connect('10', { token: '10:bad' })
+    server.connect('10', { token: '10:bad', subprotocol: '1.0.0' })
   )
 })
 
 it('Detects wrong cookie', async ({ server }) => {
   await expectError('Wrong credentials', () =>
-    server.connect('10', { cookie: { token: '10:bad' } })
+    server.connect('10', { cookie: { token: '10:bad' }, subprotocol: '1.0.0' })
   )
 })
 
 it('Sends server subprotocol', async ({ server }) => {
-  let client = await server.connect('10', { token: '10:good' })
+  let client = await server.connect('10', {
+    token: '10:good',
+    subprotocol: '1.0.0'
+  })
   assert(
     client.node.remoteSubprotocol !== '0.0.0',
     'Server does not set subprotocol'
@@ -47,6 +54,21 @@ it('Sends server subprotocol', async ({ server }) => {
     client.node.remoteSubprotocol === '1.0.0',
     `Server set subprotocol ${client.node.remoteSubprotocol} instead of 1.0.0`
   )
+})
+
+it('Checks users subprotocol', async ({ server }) => {
+  await expectError(
+    '^1.0.0 application subprotocols are supported, but you use 0.9.1',
+    () =>
+      server.connect('10', {
+        token: '10:good',
+        subprotocol: '0.9.1'
+      })
+  )
+  server.connect('10', {
+    token: '10:good',
+    subprotocol: '1.0.1'
+  })
 })
 
 module.exports = getTests()
