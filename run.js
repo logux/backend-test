@@ -7,12 +7,20 @@ let tests = require('./tests')
 
 async function runTest (data) {
   let spinner = ora(tests[data.index].title).start()
+  let server
+  if (data.backend === 'local') {
+    server = new TestServer()
+    local(server)
+  } else {
+    server = new TestServer({
+      controlSecret: data.controlSecret,
+      backend: data.backend
+    })
+  }
+  await server.listen()
   try {
-    await tests[data.index].test(data)
+    await tests[data.index].test({ ...data, server })
     spinner.succeed()
-    for (let client of data.server.connected.values()) {
-      client.destroy()
-    }
   } catch (e) {
     spinner.fail()
     process.stderr.write('\n')
@@ -46,35 +54,24 @@ async function runTest (data) {
       )
       throw e
     }
+  } finally {
+    server.destroy()
+    for (let client of server.connected.values()) {
+      client.destroy()
+    }
   }
 }
 
-module.exports = async function run (controlSecret, backend, only) {
+module.exports = async function run (backend, controlSecret, only) {
   if (only && !tests[only]) {
     throw new Error('Unknown test ' + only)
   }
 
-  let spinner = ora('Starting Logux server').start()
-  let server
-  if (backend === 'local') {
-    server = new TestServer()
-    local(server)
-  } else {
-    server = new TestServer({
-      controlSecret,
-      backend
-    })
-  }
-  await server.listen()
-  spinner.succeed()
-
   if (only) {
-    await runTest({ controlSecret, backend, server, index: only })
+    await runTest({ controlSecret, backend, index: only })
   } else {
     for (let i = 0; i < tests.length; i++) {
-      await runTest({ controlSecret, backend, server, index: i })
+      await runTest({ controlSecret, backend, index: i })
     }
   }
-
-  await server.destroy()
 }

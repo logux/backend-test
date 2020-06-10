@@ -37,4 +37,16 @@ it('Detects wrong cookie', async ({ server }) => {
   )
 })
 
+it('Sends server subprotocol', async ({ server }) => {
+  let client = await server.connect('10', { token: '10:good' })
+  assert(
+    client.node.remoteSubprotocol !== '0.0.0',
+    'Server does not set subprotocol'
+  )
+  assert(
+    client.node.remoteSubprotocol === '1.0.0',
+    `Server set subprotocol ${client.node.remoteSubprotocol} instead of 1.0.0`
+  )
+})
+
 module.exports = getTests()

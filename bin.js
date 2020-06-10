@@ -55,7 +55,7 @@ if (process.argv[3]) {
 
 process.stdout.write('\n')
 
-run('parole', process.argv[2], process.argv[3]).catch(e => {
+run(process.argv[2], 'parole', process.argv[3]).catch(e => {
   process.stderr.write(chalk.red(e.stack) + '\n')
   process.exit(1)
 })
