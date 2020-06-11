@@ -1,34 +1,11 @@
-let { it, getTests, expectError, assert } = require('./util')
+let { it, getTests, expectError, nameAction, checkActions } = require('./util')
 
 function connectClient (server) {
   return server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
 }
 
-function nameAction (userId, name) {
-  return { type: 'users/name', payload: { userId, name } }
-}
-
 function rename (client, userId, name) {
   return client.process(nameAction(userId, name))
-}
-
-function checkActions (actions, ideal) {
-  assert(
-    actions.length === ideal.length,
-    `Server sent ${actions.length} actions, instead of ${ideal.length}`
-  )
-  for (let [i, action] of actions.entries()) {
-    assert(
-      action.type === ideal[i].type,
-      `Server sent "${action.type}", instead of "${ideal[i].type}" action`
-    )
-    let json = JSON.stringify(action)
-    let idealJson = JSON.stringify(ideal[i])
-    assert(
-      json === idealJson,
-      `Server sent ${json}, instead of ${idealJson} action`
-    )
-  }
 }
 
 it('Checks subscription access', async ({ server }) => {

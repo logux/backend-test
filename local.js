@@ -46,6 +46,12 @@ module.exports = function (server) {
     }
   })
 
+  server.type('error', {
+    access () {
+      throw new Error('Error in action')
+    }
+  })
+
   server.type('users/name', {
     access (ctx, action) {
       if (ctx.headers.error) {

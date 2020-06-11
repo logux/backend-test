@@ -1,4 +1,4 @@
-let { getTests, it, send, assert } = require('./util')
+let { getTests, it, send, assert, nameAction, checkActions } = require('./util')
 
 function check (statusCode, body, answer) {
   assert(
@@ -52,6 +52,37 @@ it('Protects from brute-force', async ({ backend, controlSecret }) => {
     )
   )
   check(429, 'Too many wrong secret attempts', answers[answers.length - 1])
+})
+
+it('Processes multiple actions', async ({ server, backend, controlSecret }) => {
+  let [statusCode] = await send(backend, {
+    version: 4,
+    secret: controlSecret,
+    commands: [
+      {
+        command: 'action',
+        action: { type: 'error' },
+        meta: { id: '1 10:1:1' }
+      },
+      {
+        command: 'action',
+        action: nameAction('10', 'B'),
+        meta: { id: '1 10:1:1' }
+      }
+    ]
+  })
+  assert(
+    statusCode === 200,
+    `Back-end sent ${statusCode} status code instead of 200`
+  )
+  let client = await server.connect('10', {
+    token: '10:good',
+    subprotocol: '1.0.0'
+  })
+  checkActions(await client.collect(() => client.subscribe('users/10')), [
+    nameAction('10', 'B'),
+    { type: 'logux/processed', id: '3 10:1:1 0' }
+  ])
 })
 
 module.exports = getTests()
