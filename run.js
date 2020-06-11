@@ -6,7 +6,8 @@ let local = require('./local')
 let tests = require('./tests')
 
 async function runTest (data) {
-  let spinner = ora(tests[data.index].title).start()
+  let prefix = chalk.gray((data.index + ' ').padStart(3, ' '))
+  let spinner = ora(prefix + tests[data.index].title).start()
   let server = new TestServer({
     controlSecret: data.controlSecret,
     backend: data.backend === 'local' ? undefined : data.backend
