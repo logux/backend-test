@@ -76,7 +76,10 @@
       "Versioning",
       "Logux",
       "GraphQL",
-      "roadmap"
+      "roadmap",
+      "subprotocol",
+      "subprotocols",
+      "js"
     ]
   },
   "sharec": {
