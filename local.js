@@ -74,7 +74,7 @@ module.exports = function (server) {
     },
     async process () {
       for (let userId of names.keys()) {
-        await server.log.process(userName(userId, ''))
+        await server.process(userName(userId, ''))
       }
       names.clear()
     }

@@ -93,14 +93,14 @@
   dependencies:
     "@logux/core" logux/core#next
     JSONStream "^1.3.5"
-    chalk "^4.1.0"
+    chalk "^4.0.0"
     cookie "^0.4.1"
     dotenv "^8.2.0"
     globby "^11.0.1"
     ip "^1.1.5"
     nanoevents "^5.1.7"
     nanoid "^3.1.9"
-    pino "^6.3.2"
+    pino "^6.3.1"
     semver "^7.3.2"
     strip-ansi "^6.0.0"
     url-pattern "^1.0.3"
@@ -2728,7 +2728,7 @@ pino-std-serializers@^2.4.2:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-2.4.2.tgz#cb5e3e58c358b26f88969d7e619ae54bdfcc1ae1"
   integrity sha512-WaL504dO8eGs+vrK+j4BuQQq6GLKeCCcHaMB2ItygzVURcL1CycwNEUHTD/lHFHs/NL5qAz2UKrjYWXKSf4aMQ==
 
-pino@^6.3.2:
+pino@^6.3.1:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/pino/-/pino-6.3.2.tgz#55f73aa61584774ca5984068ffb78e8d519ce19e"
   integrity sha512-EiP3L1hoFw19KPocWimjnfXeysld0ne89ZRQ+bf8nAeA2TyuLoggNlibAi+Kla67GvQBopLdIZOsh1z/Lruo5Q==
