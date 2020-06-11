@@ -23,7 +23,13 @@ async function runTest (data) {
     spinner.fail()
     process.stderr.write('\n')
     if (e.assert) {
-      let file = e.stack.split('\n')[1].match(/\((.*)\)$/)[1]
+      let files = e.stack.split('\n').map(i => {
+        let match = i.match(/\((.*)\)$/)
+        return match ? match[1] : ''
+      })
+      let file = files.find(i => {
+        return /logux-backend-test[/\\]tests/.test(i) && !i.includes('util.js:')
+      })
       process.stderr.write(
         '  ' +
           chalk.bold.red(e.message) +
