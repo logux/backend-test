@@ -1,11 +1,11 @@
 let { getTests, it, send, assert, nameAction, checkActions } = require('./util')
 
 function check (statusCode, body, answer) {
+  assert(body === answer[1], `Back-end sent ${answer[1]} instead of ${body}`)
   assert(
     statusCode === answer[0],
     `Back-end sent ${answer[0]} status code instead of ${statusCode}`
   )
-  assert(body === answer[1], `Back-end sent ${answer[1]} instead of ${body}`)
 }
 
 it('Checks secret', async ({ backend }) => {
