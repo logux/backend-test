@@ -22,4 +22,20 @@ it('Checks action access', async ({ server }) => {
   })
 })
 
+it('Processes an error during the action processing', async ({ server }) => {
+  let client = await connectClient(server)
+  client.node.setLocalHeaders({ error: 'Test error' })
+  await expectError('Test error', () => {
+    return client.process({ type: 'logux/subscribe', channel: 'users/10' })
+  })
+})
+
+it('Processes an error during the subscription', async ({ server }) => {
+  let client = await connectClient(server)
+  client.node.setLocalHeaders({ error: 'Test error' })
+  await expectError('Test error', () => {
+    return client.process(rename(10, 'New name'))
+  })
+})
+
 module.exports = getTests()
