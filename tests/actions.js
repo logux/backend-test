@@ -98,4 +98,18 @@ it('Tracks action time', async ({ server }) => {
   ])
 })
 
+it('Processes unknown actions', async ({ server }) => {
+  let client = await connectClient(server)
+  await expectError('not have callbacks for unknown actions', () => {
+    return client.process({ type: 'unknown' })
+  })
+})
+
+it('Processes unknown subscriptions', async ({ server }) => {
+  let client = await connectClient(server)
+  await expectError('not have callbacks for unknown channel', () => {
+    return client.subscribe('unknown')
+  })
+})
+
 module.exports = getTests()
