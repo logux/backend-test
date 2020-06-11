@@ -7,15 +7,12 @@ let tests = require('./tests')
 
 async function runTest (data) {
   let spinner = ora(tests[data.index].title).start()
-  let server
+  let server = new TestServer({
+    controlSecret: data.controlSecret,
+    backend: data.backend === 'local' ? 'http://localhost/' : data.backend
+  })
   if (data.backend === 'local') {
-    server = new TestServer()
     local(server)
-  } else {
-    server = new TestServer({
-      controlSecret: data.controlSecret,
-      backend: data.backend
-    })
   }
   await server.listen()
   try {

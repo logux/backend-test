@@ -1,4 +1,5 @@
+let protocol = require('./protocol.js')
 let actions = require('./actions.js')
 let auth = require('./auth.js')
 
-module.exports = [...auth, ...actions]
+module.exports = [...protocol, ...auth, ...actions]
