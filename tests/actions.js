@@ -87,4 +87,15 @@ it('Sends action from the back-end', async ({ server }) => {
   ])
 })
 
+it('Tracks action time', async ({ server }) => {
+  let client = await connectClient(server)
+  await client.process(nameAction('10', 'A'), { time: 100 })
+  await client.process(nameAction('10', 'B'), { time: 10 })
+
+  checkActions(await client.collect(() => client.subscribe('users/10')), [
+    nameAction('10', 'A'),
+    { type: 'logux/processed', id: '5 10:1:1 0' }
+  ])
+})
+
 module.exports = getTests()
