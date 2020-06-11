@@ -9,7 +9,7 @@ async function runTest (data) {
   let spinner = ora(tests[data.index].title).start()
   let server = new TestServer({
     controlSecret: data.controlSecret,
-    backend: data.backend === 'local' ? 'http://localhost/' : data.backend
+    backend: data.backend === 'local' ? undefined : data.backend
   })
   if (data.backend === 'local') {
     local(server)

@@ -89,18 +89,18 @@
 
 "@logux/server@logux/server#next":
   version "0.8.6"
-  resolved "https://codeload.github.com/logux/server/tar.gz/be89fe3077ee60953a8f206b677a95cc8f325fa9"
+  resolved "https://codeload.github.com/logux/server/tar.gz/b69ce50342b641d61aa9d02512a483e0d685693c"
   dependencies:
     "@logux/core" logux/core#next
     JSONStream "^1.3.5"
-    chalk "^4.0.0"
+    chalk "^4.1.0"
     cookie "^0.4.1"
     dotenv "^8.2.0"
     globby "^11.0.1"
     ip "^1.1.5"
     nanoevents "^5.1.7"
     nanoid "^3.1.9"
-    pino "^6.3.1"
+    pino "^6.3.2"
     semver "^7.3.2"
     strip-ansi "^6.0.0"
     url-pattern "^1.0.3"
@@ -215,9 +215,9 @@ acorn-jsx@^5.2.0:
   integrity sha512-HiUX/+K2YpkpJ+SzBffkM/AQ2YE03S0U1kjTLVpoJdhZMOWy8qvXVN9JdLqv2QsaQ6MPYQIuNmwD8zOiYUofLQ==
 
 acorn@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.2.0.tgz#17ea7e40d7c8640ff54a694c889c26f31704effe"
-  integrity sha512-apwXVmYVpQ34m/i71vrApRrRKCWQnZZF1+npOD0WV5xZFfwWOmKGQ2RWlfdy9vWITsenisM8M0Qeq8agcFHNiQ==
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.3.1.tgz#85010754db53c3fbaf3b9ea3e083aa5c5d147ffd"
+  integrity sha512-tLc0wSnatxAQHVHUapaHdz72pi9KUyHjq5KyHjGg9Y8Ifdc79pTh2XvI6I1/chZbnM7QtNKzh66ooDogPZSleA==
 
 aggregate-error@^3.0.0:
   version "3.0.1"
@@ -2728,7 +2728,7 @@ pino-std-serializers@^2.4.2:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-2.4.2.tgz#cb5e3e58c358b26f88969d7e619ae54bdfcc1ae1"
   integrity sha512-WaL504dO8eGs+vrK+j4BuQQq6GLKeCCcHaMB2ItygzVURcL1CycwNEUHTD/lHFHs/NL5qAz2UKrjYWXKSf4aMQ==
 
-pino@^6.3.1:
+pino@^6.3.2:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/pino/-/pino-6.3.2.tgz#55f73aa61584774ca5984068ffb78e8d519ce19e"
   integrity sha512-EiP3L1hoFw19KPocWimjnfXeysld0ne89ZRQ+bf8nAeA2TyuLoggNlibAi+Kla67GvQBopLdIZOsh1z/Lruo5Q==
