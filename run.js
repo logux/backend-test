@@ -28,7 +28,7 @@ async function runTest (data) {
         return match ? match[1] : ''
       })
       let file = files.find(i => {
-        return /logux-backend-test[/\\]tests/.test(i) && !i.includes('util.js:')
+        return /[/\\]tests[/\\]\w+\.js/.test(i) && !i.includes('util.js:')
       })
       process.stderr.write(
         '  ' +
