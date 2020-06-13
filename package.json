@@ -27,6 +27,7 @@
   "devDependencies": {
     "@logux/eslint-config": "^39.0.3",
     "@logux/sharec-config": "^0.7.3",
+    "clean-publish": "^1.1.7",
     "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.2",
