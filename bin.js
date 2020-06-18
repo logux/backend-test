@@ -2,7 +2,7 @@
 
 let { readFileSync } = require('fs')
 let { join } = require('path')
-let chalk = require('chalk')
+let kleur = require('kleur')
 
 let tests = require('./tests')
 let run = require('./run')
@@ -16,9 +16,9 @@ if (
   process.argv.includes('--help')
 ) {
   process.stdout.write(
-    chalk.bold('Usage: ') +
+    kleur.bold('Usage: ') +
       'npx @logux/backend-test ' +
-      chalk.yellow('URL [TEST]') +
+      kleur.yellow('URL [TEST]') +
       '\n'
   )
   process.stdout.write('       npx @logux/backend-test local\n')
@@ -26,36 +26,36 @@ if (
 }
 
 if (process.argv[3] && !tests[process.argv[3]]) {
-  process.stderr.write(chalk.red('Unknown test ' + process.argv[3] + '\n'))
+  process.stderr.write(kleur.red('Unknown test ' + process.argv[3] + '\n'))
   process.exit(1)
 }
 
 let version = pkg.version.split('.')[0]
 
 process.stdout.write(
-  chalk.bold('Protocol version: ') +
-    chalk.green(version) +
+  kleur.bold('Protocol version: ') +
+    kleur.green(version) +
     '\n' +
-    chalk.bold('Secret:           ') +
-    chalk.green('parole') +
+    kleur.bold('Secret:           ') +
+    kleur.green('parole') +
     '\n' +
-    chalk.bold('Logux server:     ') +
-    chalk.green('http://localhost:31337/') +
+    kleur.bold('Logux server:     ') +
+    kleur.green('http://localhost:31337/') +
     '\n' +
-    chalk.bold('Back-end server:  ') +
-    chalk.green(process.argv[2]) +
+    kleur.bold('Back-end server:  ') +
+    kleur.green(process.argv[2]) +
     '\n'
 )
 
 if (process.argv[3]) {
   process.stdout.write(
-    chalk.bold('Test:             ') + chalk.green(process.argv[3]) + '\n'
+    kleur.bold('Test:             ') + kleur.green(process.argv[3]) + '\n'
   )
 }
 
 process.stdout.write('\n')
 
 run(process.argv[2], 'parole', process.argv[3]).catch(e => {
-  process.stderr.write(chalk.red(e.stack) + '\n')
+  process.stderr.write(kleur.red(e.stack) + '\n')
   process.exit(1)
 })

@@ -1,12 +1,12 @@
 let { TestServer } = require('@logux/server')
-let chalk = require('chalk')
+let kleur = require('kleur')
 let ora = require('ora')
 
 let local = require('./local')
 let tests = require('./tests')
 
 async function runTest (data) {
-  let prefix = chalk.gray((data.index + ' ').padStart(3, ' '))
+  let prefix = kleur.gray((data.index + ' ').padStart(3, ' '))
   let spinner = ora(prefix + tests[data.index].title).start()
   let server = new TestServer({
     controlSecret: data.controlSecret,
@@ -32,15 +32,15 @@ async function runTest (data) {
       })
       process.stderr.write(
         '  ' +
-          chalk.bold.red(e.message) +
+          kleur.bold().red(e.message) +
           '\n\nTest:      ' +
-          chalk.yellow(file) +
+          kleur.yellow(file) +
           '\nRe-run it: ' +
-          chalk.yellow(
+          kleur.yellow(
             'npx @logux/backend-test ' +
               data.backend +
               ' ' +
-              chalk.bold(data.index)
+              kleur.bold(data.index)
           ) +
           '\n'
       )
@@ -48,11 +48,11 @@ async function runTest (data) {
     } else {
       process.stderr.write(
         'Re-run test: ' +
-          chalk.yellow(
+          kleur.yellow(
             'npx @logux/backend-test ' +
               data.backend +
               ' ' +
-              chalk.bold(data.index)
+              kleur.bold(data.index)
           ) +
           '\n\n'
       )
