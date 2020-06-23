@@ -41,7 +41,7 @@
     "eslint-plugin-unicorn": "^20.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "size-limit": "^4.5.1",
+    "typescript": "^3.9.5",
     "yaspeller": "^7.0.0"
   },
   "husky": {
