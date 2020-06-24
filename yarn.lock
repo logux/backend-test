@@ -88,18 +88,18 @@
   dependencies:
     globals "^13.0.0"
 
-"@logux/server@^0.9.2":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@logux/server/-/server-0.9.2.tgz#b92c1b663f494e72ab5ca58b724d1145a26c2d91"
-  integrity sha512-ej6hRMrS/11dGCHeV3I6trejF0tGDXMXnTBENPz3HuDBl+VZqOE7D36VsAMdPzzLFIB9IZlqIeGmEGYOaIP7TA==
+"@logux/server@^0.9.3":
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@logux/server/-/server-0.9.3.tgz#c1bf6adf652511ee22fe41563c743c2d0bd74fc4"
+  integrity sha512-m69H1+kYcgnt+oPfztOTJelXz0SBiGJI/jR6XGHck2m8ZBQ2ss+ZtkJ4ChV2+E+37LiQf6sGQ/TT1TRof+7PYA==
   dependencies:
     "@logux/core" "^0.6.0"
     JSONStream "^1.3.5"
+    colorette "^1.2.0"
     cookie "^0.4.1"
     dotenv "^8.2.0"
     globby "^11.0.1"
     ip "^1.1.5"
-    kleur "^4.0.0"
     nanoevents "^5.1.8"
     nanoid "^3.1.10"
     pino "^6.3.2"
@@ -673,6 +673,11 @@ color-name@~1.1.4:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
+colorette@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.0.tgz#45306add826d196e8c87236ac05d797f25982e63"
+  integrity sha512-soRSroY+OF/8OdA3PTQXwaDJeMc7TfknKKrxeSCencL2a4+Tx5zhxmmv7hdpCjhKBjehzp8+bwe/T68K0hpIjw==
+
 commander@^2.19.0:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
@@ -1026,10 +1031,10 @@ eslint-plugin-import@^2.21.2:
     resolve "^1.17.0"
     tsconfig-paths "^3.9.0"
 
-eslint-plugin-jest@^23.16.0:
-  version "23.16.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-23.16.0.tgz#fada00f765b5e32a1fb10a7490f75ebf673133b3"
-  integrity sha512-51KcQup31S2NBm+Yqg3rxZIPETd+wZ/gU2rb034RpdXLcZYsa2+uwubqbbDAYIpQw3m+wywF/A56OMEouBY/wA==
+eslint-plugin-jest@^23.17.1:
+  version "23.17.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-23.17.1.tgz#c0f39ba78e0f33b7ee1ce4ec92b773e39026ea3f"
+  integrity sha512-/o36fw67qNbJGWbSBIBMfseMsNP/d88WUHAGHCi1xFwsNB3XXZGdvxbOw49j3iQz6MCW/yw8OeOsuQhi6mM5ZA==
   dependencies:
     "@typescript-eslint/experimental-utils" "^2.5.0"
 
@@ -1126,10 +1131,10 @@ eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.2.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
 
-eslint@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.3.0.tgz#f9f1fc3dc1227985d0db88769f2bbac7b4b875d7"
-  integrity sha512-dJMVXwfU5PT1cj2Nv2VPPrKahKTGdX+5Dh0Q3YuKt+Y2UhdL2YbzsVaBMyG9HC0tBismlv/r1+eZqs6SMIV38Q==
+eslint@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.3.1.tgz#76392bd7e44468d046149ba128d1566c59acbe19"
+  integrity sha512-cQC/xj9bhWUcyi/RuMbRtC3I0eW8MH0jhRELSvpKYkWep3C6YZ2OkvcvJVUeO6gcunABmzptbXBuDoXsjHmfTA==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.10.0"
@@ -2092,7 +2097,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kleur@^4.0.0, kleur@^4.0.1:
+kleur@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.0.1.tgz#3d4948534b666e2578f93b6fafb62108e64f05ef"
   integrity sha512-Qs6SqCLm63rd0kNVh+wO4XsWLU6kgfwwaPYsLiClWf0Tewkzsa6MvB21bespb8cz+ANS+2t3So1ge3gintzhlw==
@@ -3296,9 +3301,9 @@ set-value@^2.0.0, set-value@^2.0.1:
     split-string "^3.0.1"
 
 sharec@^2.1.2:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/sharec/-/sharec-2.2.1.tgz#08e17605a81a4fa950fd9162c07659fe472bebbb"
-  integrity sha512-sHdmoXhrD4hiLV7cUJkTmQABnIVceaHpARNVc/sTRzgzScaD4gBp0jrlDmbgjDcLXDUl4UTdjzPnUDzNAkgJCg==
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/sharec/-/sharec-2.2.2.tgz#c6c83a40b4e71be4f0ea3eeb3ed3cb00cec1992c"
+  integrity sha512-PziFYpcphEDD/+yiQ/9J5aZwsfgn8i/9eDB71O7uVK/LZX9bbsFvU6JJ/wRPWd6mCXM/mupaug13nolKqwXyDw==
   dependencies:
     chalk "^2.4.2"
     js-yaml ">=3.13.1"
