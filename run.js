@@ -1,12 +1,12 @@
+let { bold, red, yellow, gray } = require('colorette')
 let { TestServer } = require('@logux/server')
-let kleur = require('kleur')
 let ora = require('ora')
 
 let local = require('./local')
 let tests = require('./tests')
 
 async function runTest (data) {
-  let prefix = kleur.gray((data.index + ' ').padStart(3, ' '))
+  let prefix = gray((data.index + ' ').padStart(3, ' '))
   let spinner = ora(prefix + tests[data.index].title).start()
   let server = new TestServer({
     controlSecret: data.controlSecret,
@@ -34,15 +34,12 @@ async function runTest (data) {
       })
       process.stderr.write(
         '  ' +
-          kleur.bold().red(e.message) +
+          bold(red(e.message)) +
           '\n\nTest:      ' +
-          kleur.yellow(file) +
+          yellow(file) +
           '\nRe-run it: ' +
-          kleur.yellow(
-            'npx @logux/backend-test ' +
-              data.backend +
-              ' ' +
-              kleur.bold(data.index)
+          yellow(
+            'npx @logux/backend-test ' + data.backend + ' ' + bold(data.index)
           ) +
           '\n'
       )
@@ -50,11 +47,8 @@ async function runTest (data) {
     } else {
       process.stderr.write(
         'Re-run test: ' +
-          kleur.yellow(
-            'npx @logux/backend-test ' +
-              data.backend +
-              ' ' +
-              kleur.bold(data.index)
+          yellow(
+            'npx @logux/backend-test ' + data.backend + ' ' + bold(data.index)
           ) +
           '\n\n'
       )

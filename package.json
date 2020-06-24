@@ -21,7 +21,7 @@
   "dependencies": {
     "@logux/core": "^0.6.0",
     "@logux/server": "^0.9.3",
-    "kleur": "^4.0.1",
+    "colorette": "^1.2.0",
     "ora": "^4.0.4"
   },
   "devDependencies": {
