@@ -24,7 +24,7 @@ it('Processes an error during the authentication', async ({ server }) => {
     })
   )
   assert(!!error, 'Server did not received error from back-end')
-  if (!error.toString().includes('Test error')) {
+  if (!error.stack.includes('Test error')) {
     throw error
   }
 })

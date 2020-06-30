@@ -33,7 +33,7 @@ async function catchError (cb) {
 async function expectError (msg, cb) {
   let err = await catchError(cb)
   assert(!!err, 'Server didn’t return an error')
-  if (err.message.includes(msg)) {
+  if (err.stack.includes(msg)) {
     return err
   } else {
     throw err
