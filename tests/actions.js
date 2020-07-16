@@ -1,4 +1,11 @@
-let { it, getTests, expectError, nameAction, checkActions } = require('./util')
+let {
+  it,
+  getTests,
+  expectError,
+  nameAction,
+  checkActions,
+  getId
+} = require('./util')
 
 function connectClient (server) {
   return server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
@@ -40,7 +47,7 @@ it('Processes subscriptions', async ({ server }) => {
 
   checkActions(await client2.collect(() => client2.subscribe('users/10')), [
     nameAction('10', 'Name'),
-    { type: 'logux/processed', id: '5 10:2:1 0' }
+    { type: 'logux/processed', id: getId(client2, 'users/10') }
   ])
 
   checkActions(await client2.collect(() => rename(client1, '10', 'A')), [
@@ -60,7 +67,7 @@ it('Sends action from the back-end', async ({ server }) => {
   })
   checkActions(actions, [
     nameAction('10', ''),
-    { type: 'logux/processed', id: '6 10:1:1 0' }
+    { type: 'logux/processed', id: getId(client, { type: 'users/clean' }) }
   ])
 })
 
@@ -71,7 +78,7 @@ it('Tracks action time', async ({ server }) => {
 
   checkActions(await client.collect(() => client.subscribe('users/10')), [
     nameAction('10', 'A'),
-    { type: 'logux/processed', id: '5 10:1:1 0' }
+    { type: 'logux/processed', id: getId(client, 'users/10') }
   ])
 })
 

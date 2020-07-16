@@ -100,6 +100,19 @@ function checkActions (actions, ideal) {
   }
 }
 
+function getId (client, action) {
+  if (typeof action === 'string') {
+    action = { type: 'logux/subscribe', channel: action }
+  }
+  let json = JSON.stringify(action)
+  for (let entry of client.log.entries()) {
+    if (json === JSON.stringify(entry[0])) {
+      return entry[1].id
+    }
+  }
+  return undefined
+}
+
 module.exports = {
   it,
   getTests,
@@ -108,5 +121,6 @@ module.exports = {
   expectError,
   send,
   nameAction,
-  checkActions
+  checkActions,
+  getId
 }

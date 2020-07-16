@@ -1,4 +1,12 @@
-let { getTests, it, send, assert, nameAction, checkActions } = require('./util')
+let {
+  getTests,
+  it,
+  send,
+  assert,
+  nameAction,
+  checkActions,
+  getId
+} = require('./util')
 
 function check (statusCode, body, answer) {
   assert(body === answer[1], `Back-end sent ${answer[1]} instead of ${body}`)
@@ -63,7 +71,7 @@ it('Processes multiple actions', async ({ server, backend, controlSecret }) => {
   })
   checkActions(await client.collect(() => client.subscribe('users/10')), [
     nameAction('10', 'B'),
-    { type: 'logux/processed', id: '3 10:1:1 0' }
+    { type: 'logux/processed', id: getId(client, 'users/10') }
   ])
 })
 
