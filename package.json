@@ -22,13 +22,13 @@
     "@logux/core": "^0.6.1",
     "@logux/server": "^0.9.4",
     "colorette": "^1.2.1",
-    "ora": "^4.0.4"
+    "ora": "^4.0.5"
   },
   "devDependencies": {
     "@logux/eslint-config": "^40.0.0",
     "@logux/sharec-config": "^0.7.4",
     "clean-publish": "^1.1.7",
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.18.0",
