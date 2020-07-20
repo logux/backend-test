@@ -50,8 +50,8 @@ This repository contains test [Logux Back-end Protocol] implementation.
    * Throws an error during the action access check on `headers.errorText`.
    * Saves new user’s name on `users/name` only on bigger action time.
    * Throws an error on `error` action.
-   * On `users/clean` action sends `users/name` action to the Logux Server
-     for all users with the name.
+   * On `users/clean` action set all names to `""` and sends `users/name` action
+     with new name to all clients.
 6. Start your back-end server.
 7. Call `npx @logux/backend-test` with URL to your back-end server.
 
