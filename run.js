@@ -62,7 +62,7 @@ async function runTest (data) {
   }
 }
 
-module.exports = async function run (backend, controlSecret, only) {
+module.exports = async function run (backend, controlSecret, only, ignore) {
   if (only && !tests[only]) {
     throw new Error('Unknown test ' + only)
   }
@@ -71,7 +71,9 @@ module.exports = async function run (backend, controlSecret, only) {
     await runTest({ controlSecret, backend, index: only })
   } else {
     for (let i = 0; i < tests.length; i++) {
-      await runTest({ controlSecret, backend, index: i })
+      if (!ignore.includes(i)) {
+        await runTest({ controlSecret, backend, index: i })
+      }
     }
   }
 }

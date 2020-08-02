@@ -22,9 +22,20 @@ if (
   process.exit(0)
 }
 
-if (process.argv[3] && !tests[process.argv[3]]) {
-  process.stderr.write(red('Unknown test ' + process.argv[3] + '\n'))
-  process.exit(1)
+let ignore = []
+let only
+for (let i = 3; i < process.argv.length; i++) {
+  let arg = process.argv[i]
+  if (arg === '--ignore') {
+    ignore = process.argv[i + 1].split(',').map(parseInt)
+    i += 1
+  } else if (/^\d+$/.test(arg)) {
+    only = parseInt(arg)
+    if (!tests[only]) {
+      process.stderr.write(red('Unknown test ' + process.argv[3] + '\n'))
+      process.exit(1)
+    }
+  }
 }
 
 let version = pkg.version.split('.')[0]
@@ -44,15 +55,13 @@ process.stdout.write(
     '\n'
 )
 
-if (process.argv[3]) {
-  process.stdout.write(
-    bold('Test:             ') + green(process.argv[3]) + '\n'
-  )
+if (only) {
+  process.stdout.write(bold('Test:             ') + green(only) + '\n')
 }
 
 process.stdout.write('\n')
 
-run(process.argv[2], 'parole', process.argv[3]).catch(e => {
+run(process.argv[2], 'parole', only, ignore).catch(e => {
   process.stderr.write(red(e.stack) + '\n')
   process.exit(1)
 })
