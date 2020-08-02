@@ -1,6 +1,6 @@
 {
   "name": "@logux/backend-test",
-  "version": "4.0.7",
+  "version": "4.0.8",
   "description": "Test Logux Back-end Protocol implementation",
   "keywords": [
     "logux",
