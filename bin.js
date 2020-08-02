@@ -4,7 +4,6 @@ let { bold, green, red, yellow } = require('colorette')
 let { readFileSync } = require('fs')
 let { join } = require('path')
 
-let tests = require('./tests')
 let run = require('./run')
 
 let pkgFile = readFileSync(join(__dirname, 'package.json'))
@@ -27,14 +26,10 @@ let only
 for (let i = 3; i < process.argv.length; i++) {
   let arg = process.argv[i]
   if (arg === '--ignore') {
-    ignore = process.argv[i + 1].split(',').map(parseInt)
+    ignore = process.argv[i + 1].split(',').map(index => parseInt(index))
     i += 1
   } else if (/^\d+$/.test(arg)) {
     only = parseInt(arg)
-    if (!tests[only]) {
-      process.stderr.write(red('Unknown test ' + process.argv[3] + '\n'))
-      process.exit(1)
-    }
   }
 }
 
