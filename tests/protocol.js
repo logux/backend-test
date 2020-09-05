@@ -52,12 +52,12 @@ it('Processes multiple actions', async ({ server, backend, controlSecret }) => {
       {
         command: 'action',
         action: { type: 'error' },
-        meta: { id: '1 10:1:1 0', time: 1 }
+        meta: { id: '1 10:1:1 0', time: 101 }
       },
       {
         command: 'action',
         action: nameAction('10', 'B'),
-        meta: { id: '2 10:1:1 0', time: 2 }
+        meta: { id: '2 10:1:1 0', time: 102 }
       }
     ]
   })
