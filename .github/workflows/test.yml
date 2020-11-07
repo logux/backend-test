@@ -17,5 +17,5 @@ jobs:
           node-version: 14
       - name: Install all dependencies
         uses: bahmutov/npm-install@v1
-      - name: Build and test
+      - name: Run tests
         run: yarn test
