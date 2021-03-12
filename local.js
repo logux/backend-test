@@ -1,6 +1,6 @@
 let { isFirstOlder } = require('@logux/core')
 
-function userName (userId, name) {
+function userName(userId, name) {
   return {
     type: 'users/name',
     payload: {
@@ -29,14 +29,14 @@ module.exports = function (server) {
   })
 
   server.channel('users/:id', {
-    access (ctx) {
+    access(ctx) {
       if (ctx.headers.error) {
         throw new Error(ctx.headers.error)
       } else {
         return ctx.params.id === ctx.userId
       }
     },
-    load (ctx) {
+    load(ctx) {
       if (names.has(ctx.params.id)) {
         let { name, lastChanged } = names.get(ctx.params.id)
         return [[userName(ctx.params.id, name), { time: lastChanged.time }]]
@@ -47,23 +47,23 @@ module.exports = function (server) {
   })
 
   server.type('error', {
-    access () {
+    access() {
       throw new Error('Error in action')
     }
   })
 
   server.type('users/name', {
-    access (ctx, action) {
+    access(ctx, action) {
       if (ctx.headers.error) {
         throw new Error(ctx.headers.error)
       } else {
         return action.payload.userId === ctx.userId
       }
     },
-    resend (ctx, action) {
+    resend(ctx, action) {
       return { channels: [`users/${action.payload.userId}`] }
     },
-    process (ctx, action, meta) {
+    process(ctx, action, meta) {
       let { lastChanged } = names.get(ctx.userId) || []
       if (isFirstOlder(lastChanged, meta)) {
         names.set(ctx.userId, {
@@ -75,10 +75,10 @@ module.exports = function (server) {
   })
 
   server.type('users/clean', {
-    access () {
+    access() {
       return true
     },
-    async process () {
+    async process() {
       for (let userId of names.keys()) {
         await server.process(userName(userId, ''))
       }

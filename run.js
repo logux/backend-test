@@ -5,7 +5,7 @@ let ora = require('ora')
 let local = require('./local')
 let tests = require('./tests')
 
-async function runTest (data) {
+async function runTest(data) {
   let prefix = gray((data.index + ' ').padStart(3, ' '))
   let spinner = ora(prefix + tests[data.index].title).start()
   let server = new TestServer({
@@ -62,7 +62,7 @@ async function runTest (data) {
   }
 }
 
-module.exports = async function run (backend, controlSecret, only, ignore) {
+module.exports = async function run(backend, controlSecret, only, ignore) {
   if (only && !tests[only]) {
     throw new Error('Unknown test ' + only)
   }

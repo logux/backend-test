@@ -7,11 +7,11 @@ let {
   getId
 } = require('./util')
 
-function connectClient (server) {
+function connectClient(server) {
   return server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
 }
 
-function rename (client, userId, name) {
+function rename(client, userId, name) {
   return client.process(nameAction(userId, name))
 }
 

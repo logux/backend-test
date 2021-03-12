@@ -8,7 +8,7 @@ let {
   getId
 } = require('./util')
 
-function check (statusCode, body, answer) {
+function check(statusCode, body, answer) {
   assert(body === answer[1], `Back-end sent ${answer[1]} instead of ${body}`)
   assert(
     statusCode === answer[0],
