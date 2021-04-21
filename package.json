@@ -15,7 +15,7 @@
   "homepage": "https://logux.io/",
   "repository": "logux/backend-test",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^12.0.0 || ^14.0.0 || >=16.0.0"
   },
   "bin": "./bin.js",
   "dependencies": {
