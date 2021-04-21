@@ -1,14 +1,19 @@
-let {
-  it,
-  getTests,
+import {
+  checkActions,
   expectError,
   nameAction,
-  checkActions,
-  getId
-} = require('./util')
+  getTests,
+  getId,
+  it
+} from './util.js'
 
-function connectClient(server) {
-  return server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
+async function connectClient(server) {
+  let client = await server.connect('10', {
+    token: '10:good',
+    subprotocol: '1.0.0'
+  })
+  client.log.keepActions()
+  return client
 }
 
 function rename(client, userId, name) {
@@ -96,4 +101,4 @@ it('Processes unknown subscriptions', async ({ server }) => {
   })
 })
 
-module.exports = getTests()
+export const actions = getTests()

@@ -1,18 +1,18 @@
-let http = require('http')
+import http from 'http'
 
 let tests = []
 
-function it(title, test) {
+export function it(title, test) {
   tests.push({ title, test })
 }
 
-function getTests() {
+export function getTests() {
   let result = tests
   tests = []
   return result
 }
 
-function assert(bool, errorMsg) {
+export function assert(bool, errorMsg) {
   if (!bool) {
     let err = new Error(errorMsg)
     err.assert = true
@@ -20,7 +20,7 @@ function assert(bool, errorMsg) {
   }
 }
 
-async function catchError(cb) {
+export async function catchError(cb) {
   let err
   try {
     await cb()
@@ -30,7 +30,7 @@ async function catchError(cb) {
   return err
 }
 
-async function expectError(msg, cb) {
+export async function expectError(msg, cb) {
   let err = await catchError(cb)
   assert(!!err, 'Server didn’t return an error')
   if (err.stack.includes(msg)) {
@@ -40,7 +40,7 @@ async function expectError(msg, cb) {
   }
 }
 
-async function send(url, data) {
+export async function send(url, data) {
   if (url === 'local') url = 'http://localhost:31337/'
   let body = JSON.stringify(data)
   let parsedUrl = new URL(url)
@@ -77,11 +77,11 @@ async function send(url, data) {
   })
 }
 
-function nameAction(userId, name) {
+export function nameAction(userId, name) {
   return { type: 'users/name', payload: { userId, name } }
 }
 
-function checkActions(actions, ideal) {
+export function checkActions(actions, ideal) {
   assert(
     actions.length === ideal.length,
     `Server sent ${actions.length} actions, instead of ${ideal.length}`
@@ -100,7 +100,7 @@ function checkActions(actions, ideal) {
   }
 }
 
-function getId(client, action) {
+export function getId(client, action) {
   if (typeof action === 'string') {
     action = { type: 'logux/subscribe', channel: action }
   }
@@ -111,16 +111,4 @@ function getId(client, action) {
     }
   }
   return undefined
-}
-
-module.exports = {
-  it,
-  getTests,
-  assert,
-  catchError,
-  expectError,
-  send,
-  nameAction,
-  checkActions,
-  getId
 }

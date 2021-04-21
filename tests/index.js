@@ -1,5 +1,5 @@
-let protocol = require('./protocol.js')
-let actions = require('./actions.js')
-let auth = require('./auth.js')
+import { protocol } from './protocol.js'
+import { actions } from './actions.js'
+import { auth } from './auth.js'
 
-module.exports = [...auth, ...actions, ...protocol]
+export const tests = [...auth, ...actions, ...protocol]

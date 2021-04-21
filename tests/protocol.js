@@ -1,12 +1,12 @@
-let {
-  getTests,
-  it,
-  send,
-  assert,
-  nameAction,
+import {
   checkActions,
-  getId
-} = require('./util')
+  nameAction,
+  getTests,
+  assert,
+  getId,
+  send,
+  it
+} from './util.js'
 
 function check(statusCode, body, answer) {
   assert(body === answer[1], `Back-end sent ${answer[1]} instead of ${body}`)
@@ -69,6 +69,7 @@ it('Processes multiple actions', async ({ server, backend, controlSecret }) => {
     token: '10:good',
     subprotocol: '1.0.0'
   })
+  client.log.keepActions()
   checkActions(await client.collect(() => client.subscribe('users/10')), [
     nameAction('10', 'B'),
     { type: 'logux/processed', id: getId(client, 'users/10') }
@@ -94,4 +95,4 @@ it('Protects from brute-force', async ({ backend, controlSecret }) => {
   check(429, 'Too many wrong secret attempts', answers[answers.length - 1])
 })
 
-module.exports = getTests()
+export const protocol = getTests()

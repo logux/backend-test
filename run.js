@@ -1,9 +1,9 @@
-let { bold, red, yellow, gray } = require('colorette')
-let { TestServer } = require('@logux/server')
-let ora = require('ora')
+import { bold, red, yellow, gray } from 'colorette'
+import { TestServer } from '@logux/server'
+import ora from 'ora'
 
-let local = require('./local')
-let tests = require('./tests')
+import { tests } from './tests/index.js'
+import { local } from './local.js'
 
 async function runTest(data) {
   let prefix = gray((data.index + ' ').padStart(3, ' '))
@@ -62,7 +62,7 @@ async function runTest(data) {
   }
 }
 
-module.exports = async function run(backend, controlSecret, only, ignore) {
+export async function run(backend, controlSecret, only, ignore) {
   if (only && !tests[only]) {
     throw new Error('Unknown test ' + only)
   }

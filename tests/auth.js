@@ -1,4 +1,4 @@
-let { it, getTests, expectError, assert } = require('./util')
+import { it, getTests, expectError, assert } from './util.js'
 
 it('Supports token authentication', async ({ server }) => {
   await server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
@@ -71,4 +71,4 @@ it('Checks users subprotocol', async ({ server }) => {
   })
 })
 
-module.exports = getTests()
+export const auth = getTests()

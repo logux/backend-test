@@ -1,4 +1,4 @@
-let { isFirstOlder } = require('@logux/core')
+import { isFirstOlder } from '@logux/core'
 
 function userName(userId, name) {
   return {
@@ -10,7 +10,7 @@ function userName(userId, name) {
   }
 }
 
-module.exports = function (server) {
+export function local(server) {
   let names = new Map()
 
   server.options.subprotocol = '1.0.0'

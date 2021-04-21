@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 
-let { bold, green, red, yellow } = require('colorette')
-let { readFileSync } = require('fs')
-let { join } = require('path')
+import { bold, green, red, yellow } from 'colorette'
+import { fileURLToPath } from 'url'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 
-let run = require('./run')
+import { run } from './run.js'
 
-let pkgFile = readFileSync(join(__dirname, 'package.json'))
+let pkgFile = readFileSync(
+  join(fileURLToPath(import.meta.url), '..', 'package.json')
+)
 let pkg = JSON.parse(pkgFile)
 
 if (
