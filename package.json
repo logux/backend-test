@@ -16,7 +16,8 @@
   "repository": "logux/backend-test",
   "type": "module",
   "exports": {
-    ".": "./index.js"
+    ".": "./index.js",
+    "./package.json": "./package.json"
   },
   "engines": {
     "node": "^12.0.0 || ^14.0.0 || >=16.0.0"
