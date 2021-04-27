@@ -3,6 +3,10 @@ This project uses major version number
 for [Back-end Protocol version](https://logux.io/protocols/backend/versions/),
 minor for adding/removing tests, and patch for fixes.
 
+## 4.0.12
+* Moved to Logux Server 0.10.
+* Dropped Node.js 10 support.
+
 ## 4.0.11
 * Fixed time in `Processes multiple actions` test (by Vadim Iskuchekov).
 
