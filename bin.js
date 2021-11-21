@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { bold, green, red, yellow } from 'colorette'
 import { fileURLToPath } from 'url'
 import { readFileSync } from 'fs'
 import { join } from 'path'
+import pico from 'picocolors'
 
 import { run } from './run.js'
 
@@ -18,7 +18,10 @@ if (
   process.argv.includes('--help')
 ) {
   process.stdout.write(
-    bold('Usage: ') + 'npx @logux/backend-test ' + yellow('URL [TEST]') + '\n'
+    pico.bold('Usage: ') +
+      'npx @logux/backend-test ' +
+      pico.yellow('URL [TEST]') +
+      '\n'
   )
   process.stdout.write('       npx @logux/backend-test local\n')
   process.exit(0)
@@ -39,27 +42,29 @@ for (let i = 3; i < process.argv.length; i++) {
 let version = pkg.version.split('.')[0]
 
 process.stdout.write(
-  bold('Protocol version: ') +
-    green(version) +
+  pico.bold('Protocol version: ') +
+    pico.green(version) +
     '\n' +
-    bold('Secret:           ') +
-    green('parole') +
+    pico.bold('Secret:           ') +
+    pico.green('parole') +
     '\n' +
-    bold('Logux server:     ') +
-    green('http://localhost:31337/') +
+    pico.bold('Logux server:     ') +
+    pico.green('http://localhost:31337/') +
     '\n' +
-    bold('Back-end server:  ') +
-    green(process.argv[2]) +
+    pico.bold('Back-end server:  ') +
+    pico.green(process.argv[2]) +
     '\n'
 )
 
 if (only) {
-  process.stdout.write(bold('Test:             ') + green(only) + '\n')
+  process.stdout.write(
+    pico.bold('Test:             ') + pico.green(only) + '\n'
+  )
 }
 
 process.stdout.write('\n')
 
 run(process.argv[2], 'parole', only, ignore).catch(e => {
-  process.stderr.write(red(e.stack) + '\n')
+  process.stderr.write(pico.red(e.stack) + '\n')
   process.exit(1)
 })

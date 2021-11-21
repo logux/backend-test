@@ -1,13 +1,13 @@
-import { bold, red, yellow, gray } from 'colorette'
+import { createSpinner } from 'nanospinner'
 import { TestServer } from '@logux/server'
-import ora from 'ora'
+import pico from 'picocolors'
 
 import { tests } from './tests/index.js'
 import { local } from './local.js'
 
 async function runTest(data) {
-  let prefix = gray((data.index + ' ').padStart(3, ' '))
-  let spinner = ora(prefix + tests[data.index].title).start()
+  let prefix = pico.gray((data.index + ' ').padStart(3, ' '))
+  let spinner = createSpinner(prefix + tests[data.index].title).start()
   let server = new TestServer({
     controlSecret: data.controlSecret,
     supports: data.backend === 'local' ? '^1.0.0' : undefined,
@@ -20,9 +20,9 @@ async function runTest(data) {
   await server.listen()
   try {
     await tests[data.index].test({ ...data, server })
-    spinner.succeed()
+    spinner.success()
   } catch (e) {
-    spinner.fail()
+    spinner.error()
     process.stderr.write('\n')
     if (e.assert) {
       let files = e.stack.split('\n').map(i => {
@@ -34,12 +34,15 @@ async function runTest(data) {
       })
       process.stderr.write(
         '  ' +
-          bold(red(e.message)) +
+          pico.bold(pico.red(e.message)) +
           '\n\nTest:      ' +
-          yellow(file) +
+          pico.yellow(file) +
           '\nRe-run it: ' +
-          yellow(
-            'npx @logux/backend-test ' + data.backend + ' ' + bold(data.index)
+          pico.yellow(
+            'npx @logux/backend-test ' +
+              data.backend +
+              ' ' +
+              pico.bold(data.index)
           ) +
           '\n'
       )
@@ -47,8 +50,11 @@ async function runTest(data) {
     } else {
       process.stderr.write(
         'Re-run test: ' +
-          yellow(
-            'npx @logux/backend-test ' + data.backend + ' ' + bold(data.index)
+          pico.yellow(
+            'npx @logux/backend-test ' +
+              data.backend +
+              ' ' +
+              pico.bold(data.index)
           ) +
           '\n\n'
       )
