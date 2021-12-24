@@ -41,7 +41,7 @@ export async function expectError(msg, cb) {
 }
 
 export async function send(url, data) {
-  if (url === 'local') url = 'http://localhost:31337/'
+  if (url === 'local') url = 'http://127.0.0.1:31337/'
   let body = JSON.stringify(data)
   let parsedUrl = new URL(url)
   return new Promise((resolve, reject) => {
