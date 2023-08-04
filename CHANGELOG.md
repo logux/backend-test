@@ -1,6 +1,6 @@
 # Change Log
 This project uses major version number
-for [Back-end Protocol version](https://logux.io/protocols/backend/versions/),
+for [Back-end Protocol version](https://logux.org/protocols/backend/versions/),
 minor for adding/removing tests, and patch for fixes.
 
 ## 4.0.15
