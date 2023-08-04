@@ -3,6 +3,9 @@ This project uses major version number
 for [Back-end Protocol version](https://logux.org/protocols/backend/versions/),
 minor for adding/removing tests, and patch for fixes.
 
+## 4.0.16
+* Fixed docs.
+
 ## 4.0.15
 * Moved to Logux Server 0.12.
 * Dropped Node.js 12 support.
