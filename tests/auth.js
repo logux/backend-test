@@ -1,7 +1,7 @@
-import { it, getTests, expectError, assert } from './util.js'
+import { assert, expectError, getTests, it } from './util.js'
 
 it('Supports token authentication', async ({ server }) => {
-  await server.connect('10', { token: '10:good', subprotocol: '1.0.0' })
+  await server.connect('10', { subprotocol: '1.0.0', token: '10:good' })
 })
 
 it('Supports cookie authentication', async ({ server }) => {
@@ -18,9 +18,9 @@ it('Processes an error during the authentication', async ({ server }) => {
   })
   await expectError('Wrong credentials', () =>
     server.connect('10', {
-      token: '10:good',
+      headers: { error: 'Test error' },
       subprotocol: '1.0.0',
-      headers: { error: 'Test error' }
+      token: '10:good'
     })
   )
   assert(!!error, 'Server did not received error from back-end')
@@ -31,7 +31,7 @@ it('Processes an error during the authentication', async ({ server }) => {
 
 it('Detects wrong token', async ({ server }) => {
   await expectError('Wrong credentials', () =>
-    server.connect('10', { token: '10:bad', subprotocol: '1.0.0' })
+    server.connect('10', { subprotocol: '1.0.0', token: '10:bad' })
   )
 })
 
@@ -43,8 +43,8 @@ it('Detects wrong cookie', async ({ server }) => {
 
 it('Sends server subprotocol', async ({ server }) => {
   let client = await server.connect('10', {
-    token: '10:good',
-    subprotocol: '1.0.0'
+    subprotocol: '1.0.0',
+    token: '10:good'
   })
   assert(
     client.node.remoteSubprotocol !== '0.0.0',
@@ -61,13 +61,13 @@ it('Checks users subprotocol', async ({ server }) => {
     '^1.0.0 application subprotocols are supported, but you use 0.9.1',
     () =>
       server.connect('10', {
-        token: '10:good',
-        subprotocol: '0.9.1'
+        subprotocol: '0.9.1',
+        token: '10:good'
       })
   )
   server.connect('10', {
-    token: '10:good',
-    subprotocol: '1.0.1'
+    subprotocol: '1.0.1',
+    token: '10:good'
   })
 })
 

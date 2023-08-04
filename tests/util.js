@@ -3,7 +3,7 @@ import http from 'http'
 let tests = []
 
 export function it(title, test) {
-  tests.push({ title, test })
+  tests.push({ test, title })
 }
 
 export function getTests() {
@@ -47,14 +47,14 @@ export async function send(url, data) {
   return new Promise((resolve, reject) => {
     let req = http.request(
       {
-        method: 'POST',
-        host: parsedUrl.hostname,
-        port: parsedUrl.port,
-        path: parsedUrl.pathname + parsedUrl.search,
         headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': Buffer.byteLength(body)
-        }
+          'Content-Length': Buffer.byteLength(body),
+          'Content-Type': 'application/json'
+        },
+        host: parsedUrl.hostname,
+        method: 'POST',
+        path: parsedUrl.pathname + parsedUrl.search,
+        port: parsedUrl.port
       },
       res => {
         let answer = ''
@@ -78,7 +78,7 @@ export async function send(url, data) {
 }
 
 export function nameAction(userId, name) {
-  return { type: 'users/name', payload: { userId, name } }
+  return { payload: { name, userId }, type: 'users/name' }
 }
 
 export function checkActions(actions, ideal) {
@@ -102,7 +102,7 @@ export function checkActions(actions, ideal) {
 
 export function getId(client, action) {
   if (typeof action === 'string') {
-    action = { type: 'logux/subscribe', channel: action }
+    action = { channel: action, type: 'logux/subscribe' }
   }
   let json = JSON.stringify(action)
   for (let entry of client.log.entries()) {

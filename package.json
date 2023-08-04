@@ -26,23 +26,24 @@
   },
   "bin": "./bin.js",
   "dependencies": {
-    "@logux/core": "^0.8.0",
-    "@logux/server": "^0.12.0",
+    "@logux/core": "^0.8.4",
+    "@logux/server": "^0.12.4",
     "nanospinner": "^1.1.0",
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^47.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
-    "clean-publish": "^4.0.1",
-    "eslint": "^8.23.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.5",
+    "@logux/eslint-config": "^51.0.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "clean-publish": "^4.2.0",
+    "eslint": "^8.46.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-perfectionist": "^1.5.1",
     "eslint-plugin-prefer-let": "^3.0.1",
-    "eslint-plugin-promise": "^6.0.1",
-    "typescript": "^4.8.2"
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^5.1.6"
   },
   "prettier": {
     "arrowParens": "avoid",

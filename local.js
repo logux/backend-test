@@ -2,11 +2,11 @@ import { isFirstOlder } from '@logux/core'
 
 function userName(userId, name) {
   return {
-    type: 'users/name',
     payload: {
-      userId,
-      name
-    }
+      name,
+      userId
+    },
+    type: 'users/name'
   }
 }
 
@@ -16,7 +16,7 @@ export function local(server) {
   server.options.subprotocol = '1.0.0'
   server.options.supports = '^1.0.0'
 
-  server.auth(({ userId, token, cookie, headers }) => {
+  server.auth(({ cookie, headers, token, userId }) => {
     if (headers.error) {
       throw new Error(headers.error)
     } else if (token === `${userId}:good`) {
@@ -38,7 +38,7 @@ export function local(server) {
     },
     load(ctx) {
       if (names.has(ctx.params.id)) {
-        let { name, lastChanged } = names.get(ctx.params.id)
+        let { lastChanged, name } = names.get(ctx.params.id)
         return [[userName(ctx.params.id, name), { time: lastChanged.time }]]
       } else {
         return []
@@ -60,17 +60,17 @@ export function local(server) {
         return action.payload.userId === ctx.userId
       }
     },
-    resend(ctx, action) {
-      return { channels: [`users/${action.payload.userId}`] }
-    },
     process(ctx, action, meta) {
       let { lastChanged } = names.get(ctx.userId) || []
       if (isFirstOlder(lastChanged, meta)) {
         names.set(ctx.userId, {
-          name: action.payload.name,
-          lastChanged: meta
+          lastChanged: meta,
+          name: action.payload.name
         })
       }
+    },
+    resend(ctx, action) {
+      return { channels: [`users/${action.payload.userId}`] }
     }
   })
 

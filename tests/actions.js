@@ -1,16 +1,16 @@
 import {
   checkActions,
   expectError,
-  nameAction,
-  getTests,
   getId,
-  it
+  getTests,
+  it,
+  nameAction
 } from './util.js'
 
 async function connectClient(server) {
   let client = await server.connect('10', {
-    token: '10:good',
-    subprotocol: '1.0.0'
+    subprotocol: '1.0.0',
+    token: '10:good'
   })
   client.log.keepActions()
   return client
@@ -52,7 +52,7 @@ it('Processes subscriptions', async ({ server }) => {
 
   checkActions(await client2.collect(() => client2.subscribe('users/10')), [
     nameAction('10', 'Name'),
-    { type: 'logux/processed', id: getId(client2, 'users/10') }
+    { id: getId(client2, 'users/10'), type: 'logux/processed' }
   ])
 
   checkActions(await client2.collect(() => rename(client1, '10', 'A')), [
@@ -72,7 +72,7 @@ it('Sends action from the back-end', async ({ server }) => {
   })
   checkActions(actions, [
     nameAction('10', ''),
-    { type: 'logux/processed', id: getId(client, { type: 'users/clean' }) }
+    { id: getId(client, { type: 'users/clean' }), type: 'logux/processed' }
   ])
 })
 
@@ -83,7 +83,7 @@ it('Tracks action time', async ({ server }) => {
 
   checkActions(await client.collect(() => client.subscribe('users/10')), [
     nameAction('10', 'A'),
-    { type: 'logux/processed', id: getId(client, 'users/10') }
+    { id: getId(client, 'users/10'), type: 'logux/processed' }
   ])
 })
 

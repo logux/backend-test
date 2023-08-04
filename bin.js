@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { fileURLToPath } from 'url'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import pico from 'picocolors'
+import { fileURLToPath } from 'url'
 
 import { run } from './run.js'
 

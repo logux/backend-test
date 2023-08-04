@@ -1,11 +1,11 @@
 import {
-  checkActions,
-  nameAction,
-  getTests,
   assert,
+  checkActions,
   getId,
-  send,
-  it
+  getTests,
+  it,
+  nameAction,
+  send
 } from './util.js'
 
 function check(statusCode, body, answer) {
@@ -21,9 +21,9 @@ it('Checks secret', async ({ backend }) => {
     403,
     'Wrong secret',
     await send(backend, {
-      version: 4,
+      commands: [],
       secret: 'wrong',
-      commands: []
+      version: 4
     })
   )
 })
@@ -33,9 +33,9 @@ it('Checks version', async ({ backend, controlSecret }) => {
     400,
     'Back-end protocol version is not supported',
     await send(backend, {
-      version: 1000,
+      commands: [],
       secret: controlSecret,
-      commands: []
+      version: 1000
     })
   )
 })
@@ -44,35 +44,35 @@ it('Checks format', async ({ backend }) => {
   check(400, 'Wrong body', await send(backend, []))
 })
 
-it('Processes multiple actions', async ({ server, backend, controlSecret }) => {
+it('Processes multiple actions', async ({ backend, controlSecret, server }) => {
   let [statusCode] = await send(backend, {
-    version: 4,
-    secret: controlSecret,
     commands: [
       {
-        command: 'action',
         action: { type: 'error' },
+        command: 'action',
         meta: { id: '1 10:1:1 0', time: 101 }
       },
       {
-        command: 'action',
         action: nameAction('10', 'B'),
+        command: 'action',
         meta: { id: '2 10:1:1 0', time: 102 }
       }
-    ]
+    ],
+    secret: controlSecret,
+    version: 4
   })
   assert(
     statusCode === 200,
     `Back-end sent ${statusCode} status code instead of 200`
   )
   let client = await server.connect('10', {
-    token: '10:good',
-    subprotocol: '1.0.0'
+    subprotocol: '1.0.0',
+    token: '10:good'
   })
   client.log.keepActions()
   checkActions(await client.collect(() => client.subscribe('users/10')), [
     nameAction('10', 'B'),
-    { type: 'logux/processed', id: getId(client, 'users/10') }
+    { id: getId(client, 'users/10'), type: 'logux/processed' }
   ])
 })
 
@@ -86,9 +86,9 @@ it('Protects from brute-force', async ({ backend, controlSecret }) => {
   let answers = await Promise.all(
     secrets.map(secret =>
       send(backend, {
-        version: 4,
+        commands: [],
         secret,
-        commands: []
+        version: 4
       })
     )
   )
