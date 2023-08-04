@@ -8,7 +8,9 @@
     "test"
   ],
   "scripts": {
-    "test": "eslint . && ./bin.js local"
+    "test:lint": "eslint .",
+    "test:local": "./bin.js local",
+    "test": "pnpm run /^test:/"
   },
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
